@@ -173,7 +173,6 @@ nav {
     padding-top: 0; 
 }
 
-/* Subtle background animation */
 .hero-bg-animation {
     position: absolute;
     top: 0;
@@ -588,7 +587,6 @@ footer {
         left: 0;
     }
 
-    /* Hamburger Animation */
     .menu-toggle.active .bar:nth-child(2) {
         opacity: 0;
     }

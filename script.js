@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Typewriter Effect
+    // 1. Typewriter Effect (Updated for Teacher)
     const typeSpan = document.querySelector('.typing-text');
+    // Changed specific words for Promila Kumari
     const toType = ["Future Leaders", "Creative Minds", "Inclusive Classrooms", "Curriculums"];
     let typeIndex = 0;
     let charIndex = 0;
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!isDeleting && charIndex === currentWord.length) {
             isDeleting = true;
-            typeSpeed = 2000; // Pause at end of word
+            typeSpeed = 2000; 
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             typeIndex = (typeIndex + 1) % toType.length;
@@ -30,9 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeEffect, typeSpeed);
     }
     
-    // Start typing effect
     typeEffect();
-
 
     // 2. Mobile Menu Toggle
     const menuToggle = document.getElementById('mobile-menu');
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.toggle('active');
     });
 
-    // Close menu when clicking a link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             menuToggle.classList.remove('active');
@@ -51,12 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-    // 3. Scroll Reveal Animation (Intersection Observer)
-    const observerOptions = {
-        threshold: 0.2
-    };
-
+    // 3. Scroll Reveal Animation
+    const observerOptions = { threshold: 0.2 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -67,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach(el => observer.observe(el));
-
 
     // 4. Navbar Background on Scroll
     const navbar = document.getElementById('navbar');
@@ -81,82 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
     // 5. Smooth Scroll for Back To Top
     document.getElementById('backToTop').addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-
-    // 6. Contact Form Validation
-    const contactForm = document.getElementById('contact-form');
-    
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = document.getElementById('name');
-        const email = document.getElementById('email');
-        const message = document.getElementById('message');
-        let isValid = true;
-
-        // Simple validation logic
-        if(name.value.trim() === '') {
-            shake(name);
-            isValid = false;
-        }
-        
-        if(email.value.trim() === '' || !email.value.includes('@')) {
-            shake(email);
-            isValid = false;
-        }
-
-        if(message.value.trim() === '') {
-            shake(message);
-            isValid = false;
-        }
-
-        if (isValid) {
-            const btn = contactForm.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            // Simulate sending state
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                btn.style.borderColor = '#64ffda';
-                btn.style.color = '#64ffda';
-                contactForm.reset();
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                    btn.style.borderColor = '';
-                    btn.style.color = '';
-                }, 3000);
-            }, 1500);
-        }
-    });
-
-    function shake(element) {
-        element.style.borderColor = 'red';
-        element.style.animation = 'shake 0.5s';
-        setTimeout(() => {
-            element.style.animation = '';
-            element.style.borderColor = '';
-        }, 500);
-    }
+    // Removed the previous validation logic so Mailto works correctly.
 });
-
-// Add shake keyframes dynamically
-const styleSheet = document.createElement("style");
-styleSheet.innerText = `
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(5px); }
-    50% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-    100% { transform: translateX(0); }
-}`;
-document.head.appendChild(styleSheet);
